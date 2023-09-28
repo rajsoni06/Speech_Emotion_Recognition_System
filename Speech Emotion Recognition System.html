@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>Speech Emotion Recognition</title>
+    <style>
+      body{
+        margin: 0;
+            padding: 100px;
+            height: 100%;
+            background: url('https://miro.medium.com/v2/resize:fit:679/1*jo7560v4PDjRWxSvve_nIg.gif');
+            background-size: cover;
+      }
+
+        {
+
+            background-color: #f4f4f4;
+            margin: 100px;
+            padding: 500px;
+        }
+
+        #container {
+            text-align: center;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 500px;
+            background-color: #cdf7d9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #audio-controls1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+
+
+        #audio-controls2 {
+            justify-content: center;
+            align-items: center;
+            margin: 6px 4px;
+        }
+
+
+        audio {
+            width: 100%;
+            max-width: 300px;
+            outline: none;
+        }
+
+         input[type="file"] {
+            display: none;
+        }
+
+        label[for="audio-file"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        #emotion-result {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Speech Emotion Recognition</h1>
+        <div id="audio-controls1">
+            <audio controls></audio>
+            <input type="file" accept="audio/*" id="audio-file" capture="microphone">
+        </div>
+        <br>
+        <button>
+        <div id="audio-controls2">
+            <input type="file" accept="audio/*" id="audio-file" capture="microphone">
+            <label for="audio-file">Choose Audio</label>
+        </div>
+        </button>
+
+
+        <br><br>
+        <button id="redirect-button">Analyze Speech</button>
+        <div id="emotion-result"></div>
+    </div>
+
+
+<script>
+        const redirectButton = document.getElementById('redirect-button');
+        function redirectToNewPage() {
+            setTimeout(function () {
+                window.location.href = 'https://cocalc.com/features/jupyter-notebook';
+            }, 1000); // 1000 milliseconds (1 seconds)
+        }
+        redirectButton.addEventListener('click', redirectToNewPage);
+    </script>
+
+
+ <script>
+        const audioElement = document.querySelector('audio');
+        const analyzeButton = document.getElementById('analyze-button');
+        const emotionResult = document.getElementById('emotion-result');
+        const audioFileInput = document.getElementById('audio-file');
+
+    
+        audioFileInput.addEventListener('change', () => {
+            analyzeButton.disabled = false;
+            audioElement.src = URL.createObjectURL(audioFileInput.files[0]);
+        });
+        analyzeButton.addEventListener('click', () => {
+            const detectedEmotion = analyzeEmotion(audioElement.src);
+            emotionResult.textContent = `Detected Emotion: ${detectedEmotion}`;
+        });
+    </script>
+</body>
+</html>
